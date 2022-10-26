@@ -24,15 +24,9 @@ body {
     bottom: 0;
 }
 
-
-.header-container > h3 {
-    text-align: center;
-    font-size: 26px;
-}
-
-.header-container > h1 {
-    text-align: center;
-    font-size: 34px;
+.header-title {
+    text-align: left;
+    font-size: 36px;    
 }
 
 /* These are for the "Welcome to... Stranger's Things at the top of the page */
