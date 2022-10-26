@@ -1,3 +1,40 @@
+* {
+    font-family: 'Oswald', sans-serif;
+}
+
+body {
+    padding-top: 175px;
+    padding-bottom: 80px;
+}
+
+.header-fixed, .footer-fixed {
+    width: 100%;
+    position: fixed;
+    padding: 10px;
+    color: #FFFFFF;
+}
+
+.header-fixed {
+    background-color: #1FAB96;
+    top: 0;
+}
+
+.footer-fixed {
+    background-color: #437A72;
+    bottom: 0;
+}
+
+
+.header-container > h3 {
+    text-align: center;
+    font-size: 26px;
+}
+
+.header-container > h1 {
+    text-align: center;
+    font-size: 34px;
+}
+
 /* These are for the "Welcome to... Stranger's Things at the top of the page */
 
 #welcome-one {
@@ -10,11 +47,32 @@
 
 
 /* This is for the nav bar and its links */
-#nav {
+.nav {
     display: flex;
-    justify-content: center;
+    justify-content: right;
+    margin-right: 30px;
 }
 
 .nav-link {
     padding: 5px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    max-width: 300px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.content {
+    padding: 2px 16px;
+  }
+
+.posts-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
