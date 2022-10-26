@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { fetchPosts } from "../api"
 import { SinglePost } from "./SinglePost.js"
+import { Header } from "./Header.js"
+import { Footer } from "./Footer.js"
 
 const Posts = (props) => {
 
@@ -21,6 +23,7 @@ const Posts = (props) => {
     }, []);
 
     return (<>
+        <Header />
         <div className="posts-container">
             {posts.map((item) => {
                 return <SinglePost 
@@ -33,6 +36,7 @@ const Posts = (props) => {
                     />
             })}
         </div>
+        <Footer />
     </>);
 
 }
