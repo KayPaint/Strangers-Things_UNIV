@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 
@@ -8,11 +8,22 @@ import Register from "./components/Register.js";
 import Posts from "./components/Posts.js";
 
 const App = () => {
+
+  const [posts, setPosts] = useState([]);
+
   return (<BrowserRouter>
-    <Route path="/" component={Home} />
-    <Route path="/login" component={Login} />
-    <Route path="/register" component={Register} />
-    <Route path="/posts" component={Posts} />
+    <Route path="/">
+      <Home />
+    </Route>
+    <Route path="/login">
+      <Login />
+    </Route>
+    <Route path="/register">
+      <Register />
+    </Route>
+    <Route path="/posts">
+      <Posts posts={posts} setPosts={setPosts}/>
+    </Route>
   </BrowserRouter>
   )
 }
