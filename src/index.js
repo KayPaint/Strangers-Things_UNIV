@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Home from "./components/Home.js";
-import Login from "./components/Login.js";
-import Register from "./components/Register.js";
+import AccountForm from "./components/AccountForm.js";
 import Posts from "./components/Posts.js";
 
 const App = () => {
@@ -12,14 +11,11 @@ const App = () => {
   const [posts, setPosts] = useState([]);
 
   return (<BrowserRouter>
-    <Route path="/">
+    <Route exact path="/">
       <Home />
     </Route>
-    <Route path="/login">
-      <Login />
-    </Route>
-    <Route path="/register">
-      <Register />
+    <Route path="/account">
+      <AccountForm />
     </Route>
     <Route path="/posts">
       <Posts posts={posts} setPosts={setPosts}/>
