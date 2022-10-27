@@ -2,15 +2,22 @@ import React, { useState } from 'react'
 import { registerUser } from '../api';
 import Button from "@mui/material/Button";
 import TextField from '@mui/material/TextField';
+import { useParams , useHistory } from 'react-router-dom';ad
 
-const AccountForm = () => {
+const AccountForm = ({ setToken }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const { action } = useParams();
+    const history = useHistory()
+
+    const title = action === 'login' ? "Log In": "Register User"
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
         try {
             const {data} = await registerUser(username, password)
+            setToken(data.token)
+            history.push("/")
         } catch (error) {
             console.error("Submit Error:", error)
         }
@@ -18,7 +25,7 @@ const AccountForm = () => {
 
     return (
         <form className="account-form" onSubmit={onSubmitHandler}>
-            <h2 className='account-form-title'>Register New User</h2>
+            <h2 className='account-form-title'>{title}</h2>
             <div className='account-form-field'>
                 <label className='account-form-label'>Username</label>
                 <br />
@@ -47,7 +54,7 @@ const AccountForm = () => {
             </div>
             <div className='account-form-button-container'>
                 <Button variant="contained" className='account-form-button' type='submit'>
-                    Register User
+                    {title}
                 </Button>
             </div>
         </form>
