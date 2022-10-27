@@ -32,3 +32,25 @@ export const registerUser = async(username, password) => {
         console.error("An error occured while attempting to register user.", error)
     }
 };
+
+export const loginUser = async(username, password) => {
+    try {
+        const response = await fetch(`${BASE_URL}/${KEY}/users/login`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user: {
+                    username,
+                    password
+                }
+            })
+        });
+        const data = await response.json()
+        console.log("loginUser data:", data)
+        return data;
+    } catch (error) {
+        console.error("An error occured while attempting to login user")
+    }
+}

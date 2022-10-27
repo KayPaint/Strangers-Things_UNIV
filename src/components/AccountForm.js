@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { registerUser } from '../api';
+import { loginUser, registerUser } from '../api';
 import Button from "@mui/material/Button";
 import TextField from '@mui/material/TextField';
-import { useParams , useHistory } from 'react-router-dom';ad
+import { useParams , useHistory } from 'react-router-dom';
 
 const AccountForm = ({ setToken }) => {
     const [username, setUsername] = useState('');
@@ -14,8 +14,9 @@ const AccountForm = ({ setToken }) => {
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
+        const call = action === 'register' ? registerUser : loginUser;
         try {
-            const {data} = await registerUser(username, password)
+            const {data} = await call(username, password)
             setToken(data.token)
             history.push("/")
         } catch (error) {

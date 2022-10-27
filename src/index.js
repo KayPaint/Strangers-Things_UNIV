@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from "react";
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link, useHistory } from 'react-router-dom'
 import { fetchPosts } from "./api/index.js"
 
 import Home from "./components/Home.js";
@@ -12,6 +12,12 @@ const App = () => {
 
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token")||"");
+  const history = useHistory();
+
+  const logOut = () => {
+    setToken("");
+    history.push("/");
+  }
 
   useEffect(() => {
     const getPosts = async () => {
@@ -38,7 +44,7 @@ const App = () => {
         <Link className="nav-link" to="/posts">Posts</Link>
         <div>
           {token ? (
-            <button>Log Out</button>
+            <button onClick={logOut}>Log Out</button>
           ) : (
             <>
                 <Link className="nav-link" to="/account/login">Log In</Link>
