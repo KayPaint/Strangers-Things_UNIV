@@ -31,5 +31,4 @@ export const registerUser = async(username, password) => {
     } catch(error) {
         console.error("An error occured while attempting to register user.", error)
     }
-
 };
