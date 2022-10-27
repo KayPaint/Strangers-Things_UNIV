@@ -11,6 +11,22 @@ export const fetchPosts = async () => {
     }
 }
 
+export const fetchGuest = async (token) => {
+    try {
+        const response = await fetch(`${BASE_URL}/${KEY}/users/me`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },    
+        });
+        const {data} = await response.json()
+        console.log("User Data:", data)
+        return data;
+    } catch (error) {
+        console.error("An error occured while attempting to fetch user", error)
+    }
+}
+
 export const registerUser = async(username, password) => {
     try {
         const response = await fetch(`${BASE_URL}/${KEY}/users/register`, {
