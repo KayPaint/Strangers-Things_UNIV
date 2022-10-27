@@ -1,10 +1,8 @@
-import { Nav } from "./Nav.js"
-
 const Footer = () => {
     return (
         <div className='footer-fixed'>
             <div className='footer-container'>
-                <Nav />
+                FOOTER
             </div> 
         </div>
     )
