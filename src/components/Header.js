@@ -8,8 +8,8 @@ const Header = ({ guest, logOut }) => {
                 <h1 className="header-title">Stranger's Things</h1>
             </div> 
             <Breadcrumbs className="breadcrumb-nav">
-                <Link to="/" underline="hover" color="inherit">Home</Link>
-                <Link to="/posts" underline="hover" color="inherit">Posts</Link>
+                <Link to="/">Home</Link>
+                <Link to="/posts">Posts</Link>
                 {guest ? (
                     <Button variant="contained" color="secondary" size="small" onClick={logOut}>Log Out</Button>
                     ) : (

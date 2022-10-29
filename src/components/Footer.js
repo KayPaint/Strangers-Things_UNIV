@@ -2,7 +2,7 @@ const Footer = () => {
     return (
         <div className='footer-fixed'>
             <div className='footer-container'>
-                FOOTER
+                Project By: Kelan Painter
             </div> 
         </div>
     )

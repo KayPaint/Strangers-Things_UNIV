@@ -1,15 +1,16 @@
 import { SinglePost } from "./SinglePost.js"
 import { Header } from "./Header.js"
 import { Footer } from "./Footer.js"
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
-const Posts = ({ posts }) => {
+const Posts = ({ posts, setPosts, token, logOut, guest }) => {
 
     return (
         <>
-            <Header />
-                <Link to="/posts/create" className="ui button">Create New Post</Link>
+            <Header logOut={logOut} guest={guest}/>
+                <div className="new-post-link-cont">
+                    <Link to="/posts/create" className="new-post-link">Create New Post</Link>
+                </div>
                 <div className="posts-container">
                     {posts.map((item) => {
                         return <SinglePost 
@@ -21,6 +22,8 @@ const Posts = ({ posts }) => {
                             willDeliver={item.willDeliver}
                             isAuthor={item.isAuthor}
                             message={item.message}
+                            setPosts={setPosts}
+                            token={token}
                         />
                     })}
                 </div>

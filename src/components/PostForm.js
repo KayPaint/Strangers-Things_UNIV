@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
+import { Header } from "./Header.js"
+import { Footer } from "./Footer.js"
 import { TextField, Button, Switch, FormGroup, FormControlLabel } from "@mui/material";
 import { createPost } from "../api/index.js";
 
@@ -29,7 +31,9 @@ const createPostForm = ({ token, setPosts }) => {
             console.log("No post apparently")
         }
     }
-    return (<form className="post-form" onSubmit={onSubmitHandler}>
+    return (<>
+    <Header />
+    <form className="form" onSubmit={onSubmitHandler}>
         <h2 className="account-form-title">Create Post</h2>
         <div className="account-form-field">
             <TextField
@@ -47,6 +51,7 @@ const createPostForm = ({ token, setPosts }) => {
         <div className="account-form-field">
             <TextField 
                 label="Description"
+                fullWidth
                 variant="outlined"
                 type="text"
                 placeholder="Describe the item you are posting for sale."
@@ -59,6 +64,7 @@ const createPostForm = ({ token, setPosts }) => {
         <div className="account-form-field">
             <TextField 
                 label="Price"
+                fullWidth
                 variant="outlined"
                 type="text"
                 placeholder="What is the price of the item for sale?"
@@ -71,6 +77,7 @@ const createPostForm = ({ token, setPosts }) => {
         <div className="account-form-field">
             <TextField 
                 label="Location"
+                fullWidth
                 variant="outlined"
                 type="text"
                 placeholder="Where is this item located?"
@@ -95,7 +102,9 @@ const createPostForm = ({ token, setPosts }) => {
             </FormGroup>
         </div>
         <Button variant="contained" color="success" type="submit">Create Post</Button>
-    </form>)
+    </form>
+    <Footer />
+    </>)
 };
 
 export default createPostForm;

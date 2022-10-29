@@ -66,16 +66,25 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Home guest={guest} logOut={logOut}/>
+          <Home 
+            guest={guest} 
+            logOut={logOut}/>
         </Route>
         <Route path="/account/:action">
           <AccountForm setToken={setToken} />
         </Route>
         <Route path="/posts/create">
-          <PostForm token={token} setPosts={setPosts} />
+          <PostForm 
+            token={token} 
+            setPosts={setPosts} />
         </Route>
         <Route path="/posts">
-          <Posts posts={posts} setPosts={setPosts} token={token} />
+          <Posts 
+            guest={guest} 
+            logOut={logOut} 
+            posts={posts} 
+            setPosts={setPosts} 
+            token={token} />
         </Route>
       </Switch>
     </BrowserRouter>
