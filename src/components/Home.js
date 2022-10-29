@@ -1,13 +1,15 @@
 import { Header } from "./Header.js"
 import { Footer } from "./Footer.js"
-import AccountForm from "./AccountForm.js";
 
-const Home = () => {
+const Home = ({guest}) => {
     return (
-        <div>
-            <Header />
-            <Footer />
-        </div>
+        <>
+            <div>
+                <Header />
+                {guest && <h3>Currently logged in as: {guest}</h3>}
+                <Footer />
+            </div>
+        </>
     )
 }
 

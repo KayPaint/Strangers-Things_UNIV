@@ -10,15 +10,16 @@ const AccountForm = ({ setToken }) => {
     const { action } = useParams();
     const history = useHistory()
 
-    const title = action === 'login' ? "Log In": "Register User"
+    const title = action === 'login' ? "Log In" : "Register User"
+    const accountAction = action === 'login' ? loginUser : registerUser
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
-        const call = action === 'register' ? registerUser : loginUser;
+
         try {
-            const {data} = await call(username, password)
+            const {data} = await accountAction(username, password)
             setToken(data.token)
-            history.push("/")
+            history.push("/") 
         } catch (error) {
             console.error("Submit Error:", error)
         }
@@ -28,33 +29,31 @@ const AccountForm = ({ setToken }) => {
         <form className="account-form" onSubmit={onSubmitHandler}>
             <h2 className='account-form-title'>{title}</h2>
             <div className='account-form-field'>
-                <label className='account-form-label'>Username</label>
-                <br />
                 <TextField
-                    variant="filled"
+                    id="outlined-basic"
+                    label="Username"
+                    variant="outlined"
                     type="text" 
-                    value={username} 
-                    placeholder="Username" 
+                    value={username}  
                     required
                     onChange={(event) => setUsername(event.target.value)}
                 />
             </div>
             <br />
             <div className='account-form-field'>
-                <label className='account-form-label'>Password</label>
-                <br />
                 <TextField 
-                    variant="filled"
+                    id="outlined-basic"
+                    label="Description"
+                    variant="outlined"
                     type="password" 
                     value={password} 
-                    placeholder="Password" 
                     required 
                     minLength={8}
                     onChange={(event) => setPassword(event.target.value)}
                 />
             </div>
             <div className='account-form-button-container'>
-                <Button variant="contained" className='account-form-button' type='submit'>
+                <Button variant="outlined" className='account-form-button' type='submit'>
                     {title}
                 </Button>
             </div>
