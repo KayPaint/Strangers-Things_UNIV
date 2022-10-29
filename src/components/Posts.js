@@ -19,6 +19,8 @@ const Posts = ({ posts }) => {
                             location={item.location}
                             price={item.price}
                             willDeliver={item.willDeliver}
+                            isAuthor={item.isAuthor}
+                            message={item.message}
                         />
                     })}
                 </div>

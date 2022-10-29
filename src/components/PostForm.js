@@ -1,4 +1,5 @@
-import React, { useState, useHistory } from "react";
+import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
 import { TextField, Button, Switch, FormGroup, FormControlLabel } from "@mui/material";
 import { createPost } from "../api/index.js";
 
@@ -7,9 +8,10 @@ const createPostForm = ({ token, setPosts }) => {
     const [description, setDescription] = useState('');
     const [location, setLocation] = useState('');
     const [price, setPrice] = useState('');
-    const [willDeliver, setWillDeliver] = useState(null);
+    const [willDeliver, setWillDeliver] = useState(false);
+    const history = useHistory()
     
-    return (<form className="post-form" onSubmit={ async (event) => {
+    const onSubmitHandler = async (event) => {
         event.preventDefault();
 
         const post = await createPost(token, title, description, location, price, willDeliver)
@@ -20,14 +22,14 @@ const createPostForm = ({ token, setPosts }) => {
             setDescription('');
             setLocation('');
             setPrice('');
-            setWillDeliver(null)
+            setWillDeliver(false)
+            console.log(willDeliver)
             history.push('/posts')
         } else {
             console.log("No post apparently")
         }
-
-        
-    }}>
+    }
+    return (<form className="post-form" onSubmit={onSubmitHandler}>
         <h2 className="account-form-title">Create Post</h2>
         <div className="account-form-field">
             <TextField
