@@ -2,6 +2,7 @@ export const BASE_URL = "https://strangers-things.herokuapp.com/api";
 export const KEY = "2207-FTB-ET-WEB-PT";
 
 // API HELPER FUNCTIONS
+// CURRENTLY NOT BEING USED
 
 const headerAPI = (token) => {
     const headers = {
@@ -34,29 +35,6 @@ const callAPI = async (endpoint, defaultOptions={}) => {
 
 // GET REQUESTS
 
-// export const fetchPosts = async () => {
-//     try {
-//         const {success, error, data} = await callAPI('/posts');
-
-//         if (success) {
-//             return {
-//                 error: null,
-//                 posts: data.posts   
-//             }
-//         } else {
-//             return {
-//             error: error.message,
-//             posts: []
-//         }}
-//     } catch (error) {
-//         console.error("An error occured while attempting to fetch posts.", error);
-//         return {
-//             error: "Fetching posts has failed",
-//             posts: []
-//         }
-//     }
-// }
-
 export const fetchPosts = async () => {
     try {
         const response = await fetch(`${BASE_URL}/${KEY}/posts`);
@@ -85,6 +63,94 @@ export const fetchGuest = async (token) => {
 
 
 // POST REQUESTS
+
+export const registerUser = async(username, password) => {
+    try {
+        const response = await fetch(`${BASE_URL}/${KEY}/users/register`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              user: {
+                username,
+                password
+              }
+            })  
+        });
+        const data = await response.json()
+        console.log("registerUser data:", data)
+        return data;
+    } catch(error) {
+        console.error("An error occured while attempting to register user.", error)
+    }
+};
+
+export const loginUser = async(username, password) => {
+    try {
+        const response = await fetch(`${BASE_URL}/${KEY}/users/login`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user: {
+                    username,
+                    password
+                }
+            })
+        });
+        const data = await response.json()
+        console.log("loginUser data:", data)
+        return data;
+    } catch (error) {
+        console.error("An error occured while attempting to login user", error)
+    }
+}
+
+export const createPost = async (token, title, description, location, price, willDeliver) => {
+    try {
+        const response = await fetch(`${BASE_URL}/${KEY}/posts`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                post: {
+                    title: title,
+                    description: description,
+                    location: location,
+                    price: price,
+                    willDeliver: willDeliver
+                }
+            }),
+        });
+        const data = await response.json()
+        console.log("createPost data:", data)
+        return data;
+    } catch (error) {
+        console.error("An error occured while attempting to create post", error)
+    }
+}
+
+// DELETE REQUESTS 
+
+export const deletePost = async (token, postID) => {
+    try {
+        await fetch(`${BASE_URL}/${KEY}/posts/${postID}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        });
+    } catch (error) {
+        console.error("An error occured while attempting to delete post:", error)
+    }
+}
+
+// STASHED CODE - DELETE BEFORE SUBMIT
 
 // export const registerUser = async(username, password) => {
 //     try {
@@ -122,70 +188,25 @@ export const fetchGuest = async (token) => {
 //     }
 // }
 
-export const registerUser = async(username, password) => {
-    try {
-        const response = await fetch(`${BASE_URL}/${KEY}/users/register`, {
-            method: "POST",
-            headers: headerAPI(),
-            body: JSON.stringify({
-              user: {
-                username,
-                password
-              }
-            })  
-        });
-        const data = await response.json()
-        console.log("registerUser data:", data)
-        return data;
-    } catch(error) {
-        console.error("An error occured while attempting to register user.", error)
-    }
-};
+// export const fetchPosts = async () => {
+//     try {
+//         const {success, error, data} = await callAPI('/posts');
 
-export const loginUser = async(username, password) => {
-    try {
-        const response = await fetch(`${BASE_URL}/${KEY}/users/login`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                user: {
-                    username,
-                    password
-                }
-            })
-        });
-        const data = await response.json()
-        console.log("loginUser data:", data)
-        return data;
-    } catch (error) {
-        console.error("An error occured while attempting to login user")
-    }
-}
-
-export const createPost = async (token, title, description, location, price, willDeliver) => {
-    try {
-        const response = await fetch(`${BASE_URL}/${KEY}/posts`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                post: {
-                    title: title,
-                    description: description,
-                    location: location,
-                    price: price,
-                    willDeliver: willDeliver
-                }
-            })
-        });
-        const data = await response.json()
-        console.log("createPost data:", data)
-        return data;
-    } catch (error) {
-        console.error("An error occured while attempting to create post")
-    }
-}
+//         if (success) {
+//             return {
+//                 error: null,
+//                 posts: data.posts   
+//             }
+//         } else {
+//             return {
+//             error: error.message,
+//             posts: []
+//         }}
+//     } catch (error) {
+//         console.error("An error occured while attempting to fetch posts.", error);
+//         return {
+//             error: "Fetching posts has failed",
+//             posts: []
+//         }
+//     }
+// }
