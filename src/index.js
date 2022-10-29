@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch, Link, useHistory } from 'react-router-dom'
 import { fetchPosts, fetchGuest } from "./api/index.js"
-import { Button, Breadcrumbs } from '@mui/material';
 
 import Home from "./components/Home.js";
 import AccountForm from "./components/AccountForm.js";
@@ -65,39 +64,9 @@ const App = () => {
 
   return (
     <BrowserRouter>
-    <Breadcrumbs>
-      <Link to="/" underline="hover" color="inherit">Home</Link>
-      <Link to="/posts" underline="hover" color="inherit">Posts</Link>
-      {guest ? (
-            <Button variant="outlined" onClick={logOut}>Log Out</Button>
-          ) : (
-            <Breadcrumbs>
-                <Link to="/account/login">Log In</Link>
-                <Link to="/account/register">Register User</Link>
-            </Breadcrumbs>
-            
-            // For some reason, ^^^^ randomly when no token, and logged out, the log out button is visible
-          )}
-    </Breadcrumbs>
-    {/* <div>
-      <div className="nav">
-        <Link className="nav-link" to="/">Home</Link>
-        <Link className="nav-link" to="/posts">Posts</Link>
-        <div>
-          {guest ? (
-            <button onClick={logOut}>Log Out</button>
-          ) : (
-            <>
-                <Link className="nav-link" to="/account/login">Log In</Link>
-                <Link className="nav-link" to="/account/register">Register User</Link>
-            </>
-            // For some reason, ^^^^ randomly when no token, and logged out, the log out button is visible
-          )}
-        </div>
-      </div> */}
       <Switch>
         <Route exact path="/">
-          <Home guest={guest}/>
+          <Home guest={guest} logOut={logOut}/>
         </Route>
         <Route path="/account/:action">
           <AccountForm setToken={setToken} />
@@ -106,10 +75,9 @@ const App = () => {
           <PostForm token={token} setPosts={setPosts} />
         </Route>
         <Route path="/posts">
-          <Posts posts={posts} />
+          <Posts posts={posts} setPosts={setPosts} token={token} />
         </Route>
       </Switch>
-    {/* </div> */}
     </BrowserRouter>
   )
 }
