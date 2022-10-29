@@ -54,7 +54,7 @@ body {
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    max-width: 300px;
+    width: 400px;
 }
 
 .card:hover {
@@ -63,7 +63,7 @@ body {
 
 .content {
     padding: 2px 16px;
-  }
+}
 
 .posts-container {
     display: flex;
@@ -72,7 +72,7 @@ body {
     padding: 10px;
 }
 
-.account-form {
+.form {
     margin: auto;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     padding: 15px;
@@ -90,4 +90,21 @@ body {
 
 .account-form-label {
     font-size: 20px;
+}
+
+#current-user {
+    text-align: center;
+}
+
+.new-post-link-cont {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+}
+
+.new-post-link {
+    background-color: rgb(67, 128, 50);
+    color: white;
+    padding: 15px 32px;
+    font-size: 28px;
 }
