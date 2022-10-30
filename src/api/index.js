@@ -160,7 +160,7 @@ export const addMessage = async (token, postID, message) => {
         console.log("addMessage data:", data)
         return data;
     } catch (error) {
-        console.error("An error occured while attempting to create message", error)
+        console.error("An error occured while attempting to create comment", error)
     }
     
 }
