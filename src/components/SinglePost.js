@@ -1,19 +1,18 @@
 import { Button } from "@mui/material"
 import { deletePost } from "../api"
-const SinglePost = (props) => {
-                                            // Add messages back to here when they exist
-    const { title, description, location, price, willDeliver, isAuthor, setPosts, token } = props
-    const message = [{ 
-        fromUser: {
-            username: 'FAKE USERNAME'
-        },
-        content: "FAKE COMMENT" 
+import { Link } from 'react-router-dom'
 
-    }]
+const SinglePost = (props) => {
+
+    const { id, title, description, location, price, willDeliver, isAuthor, setPosts, token, messages } = props
 
     const handleDelete = async (postID) => {
-        await deletePost(token, postID)
-        setPosts((prevPosts) => prevPosts.filter((post) => post._id != postID))
+        console.log("postID:", postID)
+        console.log("token", token)
+        await deletePost(token, postID);
+        setPosts((prevPosts) => 
+            prevPosts.filter((post) => post._id !== postID)
+        );
     }
 
     return (
@@ -34,26 +33,26 @@ const SinglePost = (props) => {
                 <div className="card-deliver">
                     <h3>Will Deliver? {willDeliver ? "Yes" : "No"}</h3>
                 </div>
+                <div>
+                    <Link to={`/posts/${id}`}>View Listing</Link>
+                </div>
                 <br />
-                
-                {isAuthor ? <h4>You posted this listing</h4> : null}
-                    {/* ^^ This does not work, unsure why ^^ */}
-
-                {isAuthor ? <Button onClick={(() => handleDelete(post._id))}>
+                {isAuthor ? <h4><em>You posted this listing</em></h4> : null}
+    
+                {isAuthor ? <Button variant="contained" color="error" onClick={(() => handleDelete(id))}>
                     DELETE
                 </Button> : null}
-                    {/* Much like the use of isAuthor above, this doesnt work*/}
-                
-                <div>
-                    {message.map((comment) => {
+                <br/>
+                <div className="comments-container">
+                    {messages !== [] && isAuthor ? messages.map((comment) => {
                         return (
                             <div>
+                                <h4>Comments:</h4>
                                 <span>{comment.fromUser.username}</span>
                                 <p>{comment.content}</p>
                             </div>
                         )
-                    })}
-                    {/*  ^^^ This works, but if there are no messages its broken */}
+                    }) : null}
                 </div>
             </div>
         </div>

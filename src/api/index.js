@@ -11,7 +11,10 @@ const headerAPI = (token) => {
 
     if (token) {
         headers["Authorization"] = `Bearer ${token}`
-    }}
+    }
+    return headers
+}
+   
 
 const callAPI = async (endpoint, defaultOptions={}) => {
     const options = {
@@ -35,9 +38,14 @@ const callAPI = async (endpoint, defaultOptions={}) => {
 
 // GET REQUESTS
 
-export const fetchPosts = async () => {
+export const fetchPosts = async (token) => {
     try {
-        const response = await fetch(`${BASE_URL}/${KEY}/posts`);
+        const response = await fetch(`${BASE_URL}/${KEY}/posts`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        });
         const data  = await response.json();
         return data.data.posts;
     } catch (error) {
@@ -134,6 +142,28 @@ export const createPost = async (token, title, description, location, price, wil
     }
 }
 
+export const addMessage = async (token, postID, message) => {
+    try {
+        const response = await fetch(`${BASE_URL}/${KEY}/posts/${postID}/messages`, {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                message: {
+                  content: `${message}`
+                }
+            }),
+        });
+        const data = await response.json()
+        console.log("addMessage data:", data)
+        return data;
+    } catch (error) {
+        console.error("An error occured while attempting to create message", error)
+    }
+    
+}
 // DELETE REQUESTS 
 
 export const deletePost = async (token, postID) => {
