@@ -10,6 +10,7 @@ const Header = ({ guest, logOut }) => {
             <Breadcrumbs className="breadcrumb-nav">
                 <Link to="/">Home</Link>
                 <Link to="/posts">Posts</Link>
+                <Link to="/profile">Profile</Link>
                 {guest ? (
                     <Button variant="contained" color="secondary" size="small" onClick={logOut}>Log Out</Button>
                     ) : (
