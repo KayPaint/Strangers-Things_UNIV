@@ -89,13 +89,14 @@ const createPostForm = ({ token, setPosts }) => {
         <div className="account-form-field"> 
             <FormGroup>
                 <FormControlLabel 
-                    control={<Switch  
-                            checked={willDeliver}
-                            onChange={(event) => {
-                                setWillDeliver(event.target.checked);
-                                console.log(willDeliver)
-                            }}
-                        />}
+                    control={
+                    <Switch  
+                        checked={willDeliver}
+                        onChange={(event) => {
+                            setWillDeliver(event.target.checked);
+                            console.log("willDeliver?", willDeliver)
+                        }}
+                    />}
                     label="Will Deliver?"
                     labelPlacement="top"
                 />

@@ -108,3 +108,17 @@ body {
     padding: 15px 32px;
     font-size: 28px;
 }
+
+.comments-container {
+    text-align: center;
+    padding: 10px;
+}
+
+.search-bar {
+    text-align: center;
+}
+
+.search-bar-cont {
+    text-align: center;
+    padding: 10px;
+}

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useEffect } from "react";
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Link, useHistory } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom'
 import { fetchPosts, fetchGuest } from "./api/index.js"
 
 import Home from "./components/Home.js";
 import AccountForm from "./components/AccountForm.js";
 import Posts from "./components/Posts.js";
 import PostForm from "./components/PostForm.js"
+import PostDetail from "./components/PostDetail.js"
+import Profile from "./components/Profile.js"
 
 const App = () => {
 
@@ -23,16 +25,17 @@ const App = () => {
     // ^^^^ For reasons I do not know, this yields an error, saying, ".push is undefined"
   }
 
+  const getPosts = async () => {
+      try {
+          const response = await fetchPosts(token);
+          console.log("getPosts Response:", response)
+          setPosts(response)    
+      } catch (error) {
+          console.error("getPosts failed:", error)
+      }
+  } 
+
   useEffect(() => {
-    const getPosts = async () => {
-        try {
-            const response = await fetchPosts();
-            console.log("getPosts Response:", response)
-            setPosts(response)    
-        } catch (error) {
-            console.error("getPosts failed:", error)
-        }
-    } 
     getPosts()
   }, []);
 
@@ -68,15 +71,28 @@ const App = () => {
         <Route exact path="/">
           <Home 
             guest={guest} 
-            logOut={logOut}/>
+            logOut={logOut}
+          />
         </Route>
         <Route path="/account/:action">
-          <AccountForm setToken={setToken} />
+          <AccountForm 
+            setToken={setToken} 
+          />
         </Route>
         <Route path="/posts/create">
           <PostForm 
             token={token} 
-            setPosts={setPosts} />
+            setPosts={setPosts} 
+          />
+        </Route>
+        <Route path="/posts/:postID">
+          <PostDetail 
+            token={token}
+            posts={posts}
+            getPosts={getPosts}
+            guest={guest}
+            logOut={logOut}
+          />
         </Route>
         <Route path="/posts">
           <Posts 
@@ -85,6 +101,12 @@ const App = () => {
             posts={posts} 
             setPosts={setPosts} 
             token={token} />
+        </Route>
+        <Route>
+          <Profile
+            guest={guest} 
+            logOut={logOut}
+          />
         </Route>
       </Switch>
     </BrowserRouter>
