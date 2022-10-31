@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import { SinglePost } from "./SinglePost.js"
 import { Header } from "./Header.js"
@@ -10,10 +11,9 @@ const Posts = ({ posts, setPosts, token, logOut, guest }) => {
     const [filteredPosts, setFilteredPosts] = useState(posts);
 
     useEffect(() => {
+
         if (searchTerm) {
-            console.log(searchTerm)
             const searchTerms = searchTerm.toLowerCase().trim().split(' ');
-            console.log(searchTerms)
             const filtered = posts.filter((postObject) => {
                 const filterableAttributes = [
                     postObject.title,
@@ -32,7 +32,6 @@ const Posts = ({ posts, setPosts, token, logOut, guest }) => {
                 return false;
             });
             setFilteredPosts(filtered)
-            console.log("These are the filtered posts", filteredPosts)
         } else {
             setFilteredPosts(posts)
         }

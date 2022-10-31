@@ -6,6 +6,7 @@ import { TextField, Button, Switch, FormGroup, FormControlLabel } from "@mui/mat
 import { createPost } from "../api/index.js";
 
 const createPostForm = ({ token, setPosts }) => {
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [location, setLocation] = useState('');
@@ -28,83 +29,84 @@ const createPostForm = ({ token, setPosts }) => {
             console.log(willDeliver)
             history.push('/posts')
         } else {
-            console.log("No post apparently")
+            return;
         }
     }
+
     return (<>
     <Header />
-    <form className="form" onSubmit={onSubmitHandler}>
-        <h2 className="account-form-title">Create Post</h2>
-        <div className="account-form-field">
-            <TextField
-                label="Title"
-                fullWidth
-                variant="outlined"
-                type="text"
-                placeholder="What is the name of the item for sale?"
-                autoComplete="off"
-                required
-                value={title}
-                onChange={(event) => setTitle(event.target.value)}
-            />
-        </div>
-        <div className="account-form-field">
-            <TextField 
-                label="Description"
-                fullWidth
-                variant="outlined"
-                type="text"
-                placeholder="Describe the item you are posting for sale."
-                autoComplete="off"
-                required
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
-            />
-        </div>
-        <div className="account-form-field">
-            <TextField 
-                label="Price"
-                fullWidth
-                variant="outlined"
-                type="text"
-                placeholder="What is the price of the item for sale?"
-                autoComplete="off"
-                required
-                value={price}
-                onChange={(event) => setPrice(event.target.value)}
-            />
-        </div>
-        <div className="account-form-field">
-            <TextField 
-                label="Location"
-                fullWidth
-                variant="outlined"
-                type="text"
-                placeholder="Where is this item located?"
-                autoComplete="off"
-                value={location}
-                onChange={(event) => setLocation(event.target.value)}
-            />
-        </div>
-        <div className="account-form-field"> 
-            <FormGroup>
-                <FormControlLabel 
-                    control={
-                    <Switch  
-                        checked={willDeliver}
-                        onChange={(event) => {
-                            setWillDeliver(event.target.checked);
-                            console.log("willDeliver?", willDeliver)
-                        }}
-                    />}
-                    label="Will Deliver?"
-                    labelPlacement="top"
+        <form className="form" onSubmit={onSubmitHandler}>
+            <h2 className="account-form-title">Create Post</h2>
+            <div className="account-form-field">
+                <TextField
+                    label="Title"
+                    fullWidth
+                    variant="outlined"
+                    type="text"
+                    placeholder="What is the name of the item for sale?"
+                    autoComplete="off"
+                    required
+                    value={title}
+                    onChange={(event) => setTitle(event.target.value)}
                 />
-            </FormGroup>
-        </div>
-        <Button variant="contained" color="success" type="submit">Create Post</Button>
-    </form>
-    <Footer />
+            </div>
+            <div className="account-form-field">
+                <TextField 
+                    label="Description"
+                    fullWidth
+                    variant="outlined"
+                    type="text"
+                    placeholder="Describe the item you are posting for sale."
+                    autoComplete="off"
+                    required
+                    value={description}
+                    onChange={(event) => setDescription(event.target.value)}
+                />
+            </div>
+            <div className="account-form-field">
+                <TextField 
+                    label="Price"
+                    fullWidth
+                    variant="outlined"
+                    type="text"
+                    placeholder="What is the price of the item for sale?"
+                    autoComplete="off"
+                    required
+                    value={price}
+                    onChange={(event) => setPrice(event.target.value)}
+                />
+            </div>
+            <div className="account-form-field">
+                <TextField 
+                    label="Location"
+                    fullWidth
+                    variant="outlined"
+                    type="text"
+                    placeholder="Where is this item located?"
+                    autoComplete="off"
+                    value={location}
+                    onChange={(event) => setLocation(event.target.value)}
+                />
+            </div>
+            <div className="account-form-field"> 
+                <FormGroup>
+                    <FormControlLabel 
+                        control={
+                        <Switch  
+                            checked={willDeliver}
+                            onChange={(event) => {
+                                setWillDeliver(event.target.checked);
+                                console.log("willDeliver?", willDeliver)
+                            }}
+                        />}
+                        label="Will Deliver?"
+                        labelPlacement="top"
+                    />
+                </FormGroup>
+            </div>
+            <Button variant="contained" color="success" type="submit">Create Post</Button>
+        </form>
+        <Footer />
     </>)
 };
 

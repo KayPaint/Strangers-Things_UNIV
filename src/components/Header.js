@@ -1,7 +1,9 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Breadcrumbs } from '@mui/material';
-import { Link } from 'react-router-dom'
 
 const Header = ({ guest, logOut }) => {
+
     return (
         <div className='header-fixed'>
             <div className='header-container'>
@@ -18,8 +20,6 @@ const Header = ({ guest, logOut }) => {
                         <Link to="/account/login">Log In</Link>
                         <Link to="/account/register">Register User</Link>
                     </Breadcrumbs>
-                    
-                    // For some reason, ^^^^ randomly when no token, and logged out, the log out button is visible
                     )}
             </Breadcrumbs>
         </div>

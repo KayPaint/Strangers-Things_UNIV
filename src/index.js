@@ -16,11 +16,13 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token") || null);
   const [guest, setGuest] = useState(null);
+  const [profileObj, setProfileObject] = useState(null);
   const history = useHistory();
 
   const logOut = () => {
     setToken(null);
     setGuest(null);
+    setProfileObject(null);
     history.push("/");
     // ^^^^ For reasons I do not know, this yields an error, saying, ".push is undefined"
   }
@@ -47,7 +49,8 @@ const App = () => {
         try {
           const response = await fetchGuest(token);
           console.log("getGuest Response:", response)
-          setGuest(response.username)
+          setGuest(response.username);
+          setProfileObject(response);
         } catch (error) {
           console.error("getGuest failed:", error)
         }
@@ -106,6 +109,7 @@ const App = () => {
           <Profile
             guest={guest} 
             logOut={logOut}
+            profileObj={profileObj}
           />
         </Route>
       </Switch>
