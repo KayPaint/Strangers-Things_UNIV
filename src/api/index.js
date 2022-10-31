@@ -1,43 +1,7 @@
 export const BASE_URL = "https://strangers-things.herokuapp.com/api";
 export const KEY = "2207-FTB-ET-WEB-PT";
 
-// API HELPER FUNCTIONS
-// CURRENTLY NOT BEING USED
-
-const headerAPI = (token) => {
-    const headers = {
-        "Content-Type": "application/json"
-    }
-
-    if (token) {
-        headers["Authorization"] = `Bearer ${token}`
-    }
-    return headers
-}
-   
-
-const callAPI = async (endpoint, defaultOptions={}) => {
-    const options = {
-        headers: headerAPI(defaultOptions.token),
-    };
-
-    if (defaultOptions.method) {
-        options.method = defaultOptions.method;
-    }
-
-    if (defaultOptions.body) {
-        options.body = JSON.stringify(defaultOptions.body);
-    }
-    
-    const response = await fetch(`${BASE_URL}/${endpoint}`, options);
-    const result = await response.json();
-
-    return result;
-}
-
-
 // GET REQUESTS
-
 export const fetchPosts = async (token) => {
     try {
         const response = await fetch(`${BASE_URL}/${KEY}/posts`, {
@@ -61,17 +25,14 @@ export const fetchGuest = async (token) => {
                 'Authorization': `Bearer ${token}`
               },    
         });
-        const {data} = await response.json()
-        console.log("User Data:", data)
+        const {data} = await response.json();
         return data;
     } catch (error) {
         console.error("An error occured while attempting to fetch user", error)
     }
 }
 
-
 // POST REQUESTS
-
 export const registerUser = async(username, password) => {
     try {
         const response = await fetch(`${BASE_URL}/${KEY}/users/register`, {
@@ -86,8 +47,7 @@ export const registerUser = async(username, password) => {
               }
             })  
         });
-        const data = await response.json()
-        console.log("registerUser data:", data)
+        const data = await response.json();
         return data;
     } catch(error) {
         console.error("An error occured while attempting to register user.", error)
@@ -108,8 +68,7 @@ export const loginUser = async(username, password) => {
                 }
             })
         });
-        const data = await response.json()
-        console.log("loginUser data:", data)
+        const data = await response.json();
         return data;
     } catch (error) {
         console.error("An error occured while attempting to login user", error)
@@ -134,8 +93,7 @@ export const createPost = async (token, title, description, location, price, wil
                 }
             }),
         });
-        const data = await response.json()
-        console.log("createPost data:", data)
+        const data = await response.json();
         return data;
     } catch (error) {
         console.error("An error occured while attempting to create post", error)
@@ -156,16 +114,15 @@ export const addMessage = async (token, postID, message) => {
                 }
             }),
         });
-        const data = await response.json()
-        console.log("addMessage data:", data)
+        const data = await response.json();
         return data;
     } catch (error) {
         console.error("An error occured while attempting to create comment", error)
     }
     
 }
-// DELETE REQUESTS 
 
+// DELETE REQUESTS 
 export const deletePost = async (token, postID) => {
     try {
         await fetch(`${BASE_URL}/${KEY}/posts/${postID}`, {
@@ -179,64 +136,3 @@ export const deletePost = async (token, postID) => {
         console.error("An error occured while attempting to delete post:", error)
     }
 }
-
-// STASHED CODE - DELETE BEFORE SUBMIT
-
-// export const registerUser = async(username, password) => {
-//     try {
-//         const {success, error, data} = await callAPI('/users/register', {
-//             method: 'POST',
-//             body: {
-//                 user: {
-//                     username,
-//                     password
-//                 }
-//             }
-//         });
-    
-//         if (success) {
-//             return {
-//                 error: null,
-//                 token: data.token,
-//                 message: data.message
-//             }
-//         } else {
-//             return {
-//                 error: error.message,
-//                 token: null,
-//                 message: null
-//             }
-//         } 
-//     } catch (error) {
-//         console.error("An error occured while attempting to register user", error)
-
-//         return {
-//             error: "Registration has failed",
-//             token: null,
-//             message: null
-//         }
-//     }
-// }
-
-// export const fetchPosts = async () => {
-//     try {
-//         const {success, error, data} = await callAPI('/posts');
-
-//         if (success) {
-//             return {
-//                 error: null,
-//                 posts: data.posts   
-//             }
-//         } else {
-//             return {
-//             error: error.message,
-//             posts: []
-//         }}
-//     } catch (error) {
-//         console.error("An error occured while attempting to fetch posts.", error);
-//         return {
-//             error: "Fetching posts has failed",
-//             posts: []
-//         }
-//     }
-// }
