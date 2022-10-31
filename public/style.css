@@ -29,17 +29,6 @@ body {
     font-size: 36px;    
 }
 
-/* These are for the "Welcome to... Stranger's Things at the top of the page */
-
-#welcome-one {
-    text-align: center;
-}
-
-#welcome-two {
-    text-align: center;
-}
-
-
 /* This is for the nav bar and its links */
 .nav {
     display: flex;
@@ -92,7 +81,11 @@ body {
     font-size: 20px;
 }
 
-#current-user {
+.current-user {
+    margin: auto;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 15px;
+    max-width: 350px;
     text-align: center;
 }
 
@@ -111,7 +104,46 @@ body {
 
 .comments-container {
     text-align: center;
+}
+
+.posts-container {
+    margin: auto;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 15px;
+    text-align: center;
+}
+
+.messages-container {
+    margin: auto;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 15px;
+    max-width: 350px;
+    text-align: center; 
+}
+
+.search-bar {
+    text-align: center;
+}
+
+.search-bar-cont {
+    text-align: center;
     padding: 10px;
+}
+
+.profile-posts-container {
+    float: left;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 15px;
+    max-width: 350px;
+    text-align: center; 
+}
+
+.profile-messages-container {
+    float: right;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 15px;
+    max-width: 350px;
+    text-align: center; 
 }
 
 .search-bar {
